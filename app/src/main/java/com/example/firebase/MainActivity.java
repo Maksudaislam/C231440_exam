@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
-    Button btn_out, btn_note, btn_map, btn_temp, btn_cam, saveNoteButton, showNotesButton;
+    Button btn_out, btn_note, btn_map, btn_temp, btn_cam, saveNoteButton, showNotesButton,Camera;
     EditText noteEditText;
     ListView notesListView;
     FirebaseAuth auth;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         btn_map = findViewById(R.id.btnLocation);
         btn_cam = findViewById(R.id.camera);
         btn_temp = findViewById(R.id.Temp);
-
+Camera=findViewById(R.id.camera);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
@@ -105,6 +105,13 @@ public class MainActivity extends AppCompatActivity {
                 noteEditText.setText("");
             }
         });
+       Camera.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(MainActivity.this, ImageActivity.class);
+               startActivity(intent);
+           }
+       });
 
         showNotesButton.setOnClickListener(v -> {
             Cursor cursor = dbHelper.getAllNotes();
